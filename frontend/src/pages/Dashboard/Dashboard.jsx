@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import QRCodeScanner from '../../components/QRCodeScanner';
+import '../Dashboard/Dashboard.css';
 
 const Dashboard = () => {
   const [attendanceRecords, setAttendanceRecords] = useState([]);
