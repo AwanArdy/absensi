@@ -49,24 +49,26 @@ const Reports = () => {
       </div>
       <div className="report-table-section">
         {filteredRecords.length > 0 ? (
-        <thead>
+          <table className="report-table">
+            <thead>
               <tr>ID</tr>
               <tr>ID Siswa</tr>
               <tr>Tanggal</tr>
               <tr>Waktu</tr>
               <tr>Status</tr>
-        </thead>
-          <tbody>
-            {filteredRecords.map((record) => (
-              <tr key={record.id}>
-                <td>{record.id}</td>
-                <td>{record.studentId}</td>
-                <td>{record.date}</td>
-                <td>{record.time}</td>
-                <td>{record.status}</td>
-              </tr>
-            ))}
-          </tbody>
+            </thead>
+            <tbody>
+              {filteredRecords.map((record) => (
+                <tr key={record.id}>
+                  <td>{record.id}</td>
+                  <td>{record.studentId}</td>
+                  <td>{record.date}</td>
+                  <td>{record.time}</td>
+                  <td>{record.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         ) : (
           <p className="no-records">Tidak ada data absensi untuk rentang waktu ini</p>
         )}
