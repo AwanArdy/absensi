@@ -1,6 +1,6 @@
 const redis = require('../config/cache');
 
-async function getCacheData(key, fetchFunction) {
+async function getCachedData(key, fetchFunction) {
   const cachedData = await redis.get(key);
   if (cachedData) return JSON.parse(cachedData);
 
@@ -9,4 +9,4 @@ async function getCacheData(key, fetchFunction) {
   return freshData;
 }
 
-module.exports = { getCacheData };
+module.exports = { getCachedData };

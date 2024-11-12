@@ -1,4 +1,5 @@
 const pool = require('../config/db');
+const { getCachedData } = require('../services/cacheService');
 
 const Student = {
   getAll: async (callback) => {
@@ -24,6 +25,7 @@ const Student = {
         'INSERT INTO students (name, age) VALUES ($1, $2) RETURNING *',
         [name, age]
       );
+      await redis.del('all_students');
       callback(null, res.rows[0]);
     } catch (err) {
       callback(err, null);
@@ -36,7 +38,9 @@ const Student = {
         'UPDATE students SET name = $1, age = $2 WHERE id = $3',
         [name, age, id]
       );
-      callback(err);
+      await redis.del('all_students');
+      await redis.del(`student_${id}`);
+      callback(null);
     } catch (err) {
       callback(err);
     }
@@ -44,6 +48,8 @@ const Student = {
   delete: async (id, callback) => {
     try {
       await pool.query('DELETE FROM students WHERE id = $1', [id]);
+      await redis.del('all_students');
+      await redis.del(`student_${id}`);
       callback(null);
     } catch (err) {
       callback(err);
