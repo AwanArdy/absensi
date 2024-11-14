@@ -4,7 +4,7 @@ const { getCachedData } = require('../services/cacheService');
 const Student = {
   getAll: async (callback) => {
     try {
-      const res = await pool.query('SELECT * FROM students');
+      const res = await pool.query('SELECT id, name, age FROM students');
       callback(null, res.rows);
     } catch (err) {
       callback(err, null);
@@ -12,7 +12,7 @@ const Student = {
   },
   getById: async (id, callback) => {
     try {
-      const res = await pool.query('SELECT * FROM students WHERE id = $1', [id]);
+      const res = await pool.query('SELECT id, name, age FROM students WHERE id = $1', [id]);
       callback(null, res.rows[0]);
     } catch (err) {
       callback(err, null);
