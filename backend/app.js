@@ -1,4 +1,5 @@
 const express = require("express");
+const compression = require('compression');
 const { default: rateLimit } = require("express-rate-limit");
 const attendanceRoutes = require('./routes/attendanceRoutes');
 const studentRoutes = require('./routes/studentRoutes');
@@ -6,6 +7,7 @@ require('dotenv').config();
 
 const app = express();
 app.use(express.json());
+app.use(compression());
 
 const attendanceLimiter = rateLimit({
   windowMs: 60 * 1000,
