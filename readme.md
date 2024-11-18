@@ -1,1 +1,1 @@
-don't forget npm install
+npm install
